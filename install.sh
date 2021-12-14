@@ -160,16 +160,16 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 pacman -Sq --noconfirm linux-headers vim git jshon expac git wget acpid avahi net-tools xdg-user-dirs \
 						sysfsutils usbutils e2fsprogs inetutils netctl less which \
-					       	man-db man-pages \
+					    man-db man-pages \
 						xorg-server xorg-xinit xorg-xrandr xorg-xfontsel \
-					       	xorg-xlsfonts xorg-xkill xorg-xinput \
+					    xorg-xlsfonts xorg-xkill xorg-xinput \
 						xorg-xwininfo xorg-xsetroot xorg-xbacklight xorg-xprop xclip \
 						xf86-input-synaptics xf86-input-libinput xf86-input-evdev \
 						xf86-video-amdgpu xf86-video-intel xf86-video-vmware \
-    						noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-jetbrains-mono \
-					       	ttf-joypixels ttf-font-awesome \
+    					noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-jetbrains-mono \
+					    ttf-joypixels ttf-font-awesome \
 						brightnessctl sxiv mpv zathura zathura-pdf-mupdf ffmpeg \
-					       	imagemagick libnotify pamixer unclutter firefox-i18n-de \
+					    imagemagick libnotify pamixer unclutter firefox-i18n-de \
 						xcompmgr youtube-dl rsync \
 						mesa \
 						vulkan-icd-loader \

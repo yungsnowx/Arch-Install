@@ -158,13 +158,18 @@ sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
 pacman -Sq --noconfirm linux-headers vim git jshon expac git wget acpid avahi net-tools xdg-user-dirs \
-						sysfsutils usbutils e2fsprogs inetutils netctl less which man-db man-pages \
-						xorg-server xorg-xinit xorg-xrandr xorg-xfontsel xorg-xlsfonts xorg-xkill xorg-xinput \
+						sysfsutils usbutils e2fsprogs inetutils netctl less which \
+					       	man-db man-pages \
+						xorg-server xorg-xinit xorg-xrandr xorg-xfontsel \
+					       	xorg-xlsfonts xorg-xkill xorg-xinput \
 						xorg-xwininfo xorg-xsetroot xorg-xbacklight xorg-xprop xclip \
 						xf86-input-synaptics xf86-input-libinput xf86-input-evdev \
 						xf86-video-amdgpu xf86-video-intel xf86-video-vmware \
-    					noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-jetbrains-mono ttf-joypixels ttf-font-awesome \
-						brightnessctl sxiv mpv zathura zathura-pdf-mupdf ffmpeg imagemagick libnotify pamixer \
+    						noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-jetbrains-mono \
+					       	ttf-joypixels ttf-font-awesome \
+						brightnessctl sxiv mpv zathura zathura-pdf-mupdf ffmpeg \
+					       	imagemagick libnotify pamixer unclutter firefox-i18n-de \
+						xcompmgr youtube-dl rsync \
 						mesa \
 						vulkan-icd-loader \
 						networkmanager \
@@ -194,4 +199,30 @@ echo "Finished!"
 echo "You can reboot now."
 echo "Please login with the root user and then with your own user. You need to set the passwords!."
 echo "Do: umount -R /mnt && reboot"
+install3_path=/home/$username/arch_install3.sh
+sed '1,/^#postinstall$/d' arch_install2.sh > $ai3_path
+chown $username:$username $ai3_path
+chmod +x $ai3_path
+su -c $install3_path -s /bin/sh $username
+
+exit
+
+#postinstall
+printf '\033c'
+cd $HOME
+git clone --separate-git-dir=$HOME/.dotfiles https://github.com/yungsnowx/dotfiles.git tmpdotfiles
+rsync --recursive --verbose --exclude '.git' tmpdotfiles/ $HOME/
+rm -r tmpdotfiles
+git clone --depth=1 https://github.com/yungsnowx/dwm.git ~/.local/src/dwm
+sudo make -C ~/.local/src/dwm clean install
+git clone --depth=1 https://github.com/yungsnowx/st.git ~/.local/src/st
+sudo make -C ~/.local/src/st install
+git clone --depth=1 https://github.com/yungsnowx/dmenu.git ~/.local/src/dmenu
+sudo make -C ~/.local/src/dmenu install
+
+ln -s ~/.config/x11/xinitrc .xinitrc
+ln -s ~/.config/shell/profile .zprofile
+rm ~/.zshrc ~/.zsh_history
+alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+dots config --local status.showUntrackedFiles no
 exit

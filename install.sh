@@ -201,18 +201,18 @@ echo "You can reboot now."
 echo "Please login with the root user and then with your own user. You need to set the passwords!."
 echo "Do: umount -R /mnt && reboot"
 install3_path=/home/$username/arch_install3.sh
-sed '1,/^#postinstall$/d' arch_install2.sh > $ai3_path
-chown $username:$username $ai3_path
-chmod +x $ai3_path
-su -c $install3_path -s /bin/sh $username
+sed '1,/^#postinstall$/d' install2.sh > "$install3_path"
+chown "$username":"$username" "$install3_path"
+chmod +x "$install3_path"
+su -c "$install3_path" -s /bin/sh "$username"
 
 exit
 
 #postinstall
 printf '\033c'
-cd $HOME
-git clone --separate-git-dir=$HOME/.dotfiles https://github.com/yungsnowx/dotfiles.git tmpdotfiles
-rsync --recursive --verbose --exclude '.git' tmpdotfiles/ $HOME/
+cd "$HOME" || exit
+git clone --separate-git-dir="$HOME"/.dotfiles https://github.com/yungsnowx/dotfiles.git tmpdotfiles
+rsync --recursive --verbose --exclude '.git' tmpdotfiles/ "$HOME"/
 rm -r tmpdotfiles
 git clone --depth=1 https://github.com/yungsnowx/dwm.git ~/.local/src/dwm
 sudo make -C ~/.local/src/dwm clean install

@@ -11,7 +11,7 @@ sed -i "s/^#ParallelDownloads = 5$/ParallelDownloads = 5/" /etc/pacman.conf
 pacman -Syyq --noconfirm archlinux-keyring
 printf '\033c'
 
-read -rp "Encrypt disk? DOESNT WORK AT THE MOMENT!!! [y/n]: " encryptanswer
+read -rp "Encrypt disk? [y/n]: " encryptanswer
 if [[ $encryptanswer = y ]] ; then
 	lsblk
 	echo -n "Enter the drive (/dev/sdX): "
@@ -177,7 +177,7 @@ pacman -Sq --noconfirm linux-headers vim git jshon expac git wget acpid avahi ne
 						p7zip unrar unarchiver unzip unace xz rsync \
 						nfs-utils cifs-utils ntfs-3g exfat-utils \
 						alsa-utils pulseaudio-alsa pulseaudio-equalizer \
-						dash
+						dash zsh zsh-completions
 
 
 if [[ $wifianswer = y ]] ; then
@@ -189,23 +189,18 @@ systemctl enable acpid avahi-daemon NetworkManager lightdm
 rm /bin/sh
 ln -s dash /bin/sh
 echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-useradd -m -G audio,video,input,wheel,sys,log,rfkill,lp,adm -s /bin/bash "$username"
+useradd -m -G audio,video,input,wheel,sys,log,rfkill,lp,adm -s /usr/bin/zsh "$username"
 
 # Disable beep
 rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
 printf '\033c'
-echo "Finished!"
-echo "You can reboot now."
-echo "Please login with the root user and then with your own user. You need to set the passwords!."
-echo "Do: umount -R /mnt && reboot"
 install3_path=/home/$username/arch_install3.sh
 sed '1,/^#postinstall$/d' install2.sh > "$install3_path"
 chown "$username":"$username" "$install3_path"
 chmod +x "$install3_path"
 su -c "$install3_path" -s /bin/sh "$username"
-
 exit
 
 #postinstall
@@ -226,4 +221,8 @@ ln -s ~/.config/shell/profile .zprofile
 rm ~/.zshrc ~/.zsh_history
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 dots config --local status.showUntrackedFiles no
+echo "Finished!"
+echo "You can reboot now."
+echo "Please login with the root user and then with your own user. You need to set the passwords!."
+echo "Do: umount -R /mnt && reboot"
 exit

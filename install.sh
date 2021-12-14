@@ -177,7 +177,7 @@ pacman -Sq --noconfirm linux-headers vim git jshon expac git wget acpid avahi ne
 						p7zip unrar unarchiver unzip unace xz rsync \
 						nfs-utils cifs-utils ntfs-3g exfat-utils \
 						alsa-utils pulseaudio-alsa pulseaudio-equalizer \
-						dash zsh zsh-completions
+						dash zsh zsh-completions zsh-syntax-highlighting
 
 
 if [[ $wifianswer = y ]] ; then
@@ -221,6 +221,7 @@ ln -s ~/.config/shell/profile .zprofile
 rm ~/.zshrc ~/.zsh_history
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 dots config --local status.showUntrackedFiles no
+
 printf '\033c'
 echo "Finished!"
 echo "You can reboot now."

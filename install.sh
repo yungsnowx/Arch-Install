@@ -1,4 +1,5 @@
 #!/bin/bash
+
 printf '\033c'
 echo "ARCH-INSTALLER"
 read -rp "Rank mirrors for faster downloads? [y/n] " answer

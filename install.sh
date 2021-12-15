@@ -205,6 +205,9 @@ exit
 #postinstall
 printf '\033c'
 cd "$HOME" || exit
+
+wal -i ~/.local/share/wallpaper/bg.img
+
 git clone --separate-git-dir="$HOME"/.dotfiles https://github.com/yungsnowx/dotfiles.git tmpdotfiles
 rsync --recursive --verbose --exclude '.git' tmpdotfiles/ "$HOME"/
 rm -r tmpdotfiles
@@ -220,8 +223,6 @@ ln -s ~/.config/shell/profile .zprofile
 rm ~/.zshrc ~/.zsh_history
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 dots config --local status.showUntrackedFiles no
-
-wal -i ~/.local/share/wallpaper/bg.img
 
 printf '\033c'
 echo "Finished!"

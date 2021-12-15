@@ -217,6 +217,7 @@ git clone --depth=1 https://github.com/yungsnowx/st.git ~/.local/src/st
 sudo make -C ~/.local/src/st install
 git clone --depth=1 https://github.com/yungsnowx/dmenu.git ~/.local/src/dmenu
 sudo make -C ~/.local/src/dmenu install
+git clone https://github.com/itchyny/lightline.vim ~/.vim/pack/plugins/start/lightline
 
 ln -s ~/.config/x11/xinitrc .xinitrc
 ln -s ~/.config/shell/profile .zprofile

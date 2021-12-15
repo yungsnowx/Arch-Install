@@ -96,6 +96,7 @@ arch-chroot /mnt ./install2.sh
 exit
 
 #chroot
+#!/bin/bash
 printf '\033c'
 echo -n "Enter Hostname: "
 read -r hostname
@@ -159,7 +160,7 @@ sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
 pacman -Sq --noconfirm linux-headers vim git jshon expac git wget acpid avahi net-tools xdg-user-dirs \
-                       sysfsutils usbutils e2fsprogs inetutils netctl less which \
+                       sysfsutils usbutils e2fsprogs inetutils netctl less which neofetch \
                        man-db man-pages man-pages-de \
                        xorg-server xorg-xinit xorg-xrandr xorg-xfontsel \
                        xorg-xlsfonts xorg-xkill xorg-xinput \
@@ -169,8 +170,8 @@ pacman -Sq --noconfirm linux-headers vim git jshon expac git wget acpid avahi ne
                        noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-jetbrains-mono \
                        ttf-joypixels ttf-font-awesome \
                        brightnessctl sxiv mpv zathura zathura-pdf-mupdf ffmpeg \
-                       imagemagick libnotify pamixer unclutter firefox-i18n-de python-pywal \
-                       xcompmgr youtube-dl rsync dunst arandr \
+                       imagemagick libnotify pamixer unclutter firefox-i18n-de \
+                       xcompmgr youtube-dl rsync dunst arandr nitrogen \
                        mesa vulkan-icd-loader \
                        networkmanager \
                        p7zip unrar unarchiver unzip unace xz rsync \
@@ -183,7 +184,7 @@ if [[ $wifianswer = y ]] ; then
 	pacman -Sq --noconfirm wireless_tools wpa_supplicant ifplugd dialog
 fi
 
-systemctl enable acpid avahi-daemon NetworkManager lightdm
+systemctl enable acpid avahi-daemon NetworkManager
 
 rm /bin/sh
 ln -s dash /bin/sh
@@ -203,10 +204,9 @@ su -c "$install3_path" -s /bin/sh "$username"
 exit
 
 #postinstall
+#!/bin/bash
 printf '\033c'
 cd "$HOME" || exit
-
-wal -n -q -e -t -s -i ~/.local/share/wallpaper/bg.img
 
 git clone --separate-git-dir="$HOME"/.dotfiles https://github.com/yungsnowx/dotfiles.git tmpdotfiles
 rsync --recursive --verbose --exclude '.git' tmpdotfiles/ "$HOME"/
@@ -223,6 +223,13 @@ ln -s ~/.config/shell/profile .zprofile
 rm ~/.zshrc ~/.zsh_history
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 dots config --local status.showUntrackedFiles no
+
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin || exit
+makepkg -rsi
+cd .. && rm -rf yay-bin
+
+yay -S libxft-bgra
 
 printf '\033c'
 echo "Finished!"

@@ -96,6 +96,7 @@ arch-chroot /mnt ./install2.sh
 exit
 
 #chroot
+#!/bin/bash
 printf '\033c'
 echo -n "Enter Hostname: "
 read -r hostname
@@ -169,7 +170,7 @@ pacman -Sq --noconfirm linux-headers vim git jshon expac git wget acpid avahi ne
                        noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-jetbrains-mono \
                        ttf-joypixels ttf-font-awesome \
                        brightnessctl sxiv mpv zathura zathura-pdf-mupdf ffmpeg \
-                       imagemagick libnotify pamixer unclutter firefox-i18n-de python-pywal \
+                       imagemagick libnotify pamixer unclutter firefox-i18n-de \
                        xcompmgr youtube-dl rsync dunst arandr \
                        mesa vulkan-icd-loader \
                        networkmanager \
@@ -203,10 +204,9 @@ su -c "$install3_path" -s /bin/sh "$username"
 exit
 
 #postinstall
+#!/bin/bash
 printf '\033c'
 cd "$HOME" || exit
-
-wal -n -q -e -t -s -i ~/.local/share/wallpaper/bg.img
 
 git clone --separate-git-dir="$HOME"/.dotfiles https://github.com/yungsnowx/dotfiles.git tmpdotfiles
 rsync --recursive --verbose --exclude '.git' tmpdotfiles/ "$HOME"/

@@ -159,25 +159,24 @@ sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
 pacman -Sq --noconfirm linux-headers vim git jshon expac git wget acpid avahi net-tools xdg-user-dirs \
-						sysfsutils usbutils e2fsprogs inetutils netctl less which \
-					    man-db man-pages \
-						xorg-server xorg-xinit xorg-xrandr xorg-xfontsel \
-					    xorg-xlsfonts xorg-xkill xorg-xinput \
-						xorg-xwininfo xorg-xsetroot xorg-xbacklight xorg-xprop xclip \
-						xf86-input-synaptics xf86-input-libinput xf86-input-evdev \
-						xf86-video-amdgpu xf86-video-intel xf86-video-vmware \
-    					noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-jetbrains-mono \
-					    ttf-joypixels ttf-font-awesome \
-						brightnessctl sxiv mpv zathura zathura-pdf-mupdf ffmpeg \
-					    imagemagick libnotify pamixer unclutter firefox-i18n-de \
-						xcompmgr youtube-dl rsync dunst \
-						mesa \
-						vulkan-icd-loader \
-						networkmanager \
-						p7zip unrar unarchiver unzip unace xz rsync \
-						nfs-utils cifs-utils ntfs-3g exfat-utils \
-						alsa-utils pulseaudio-alsa pulseaudio-equalizer \
-						dash zsh zsh-completions zsh-syntax-highlighting
+                       sysfsutils usbutils e2fsprogs inetutils netctl less which \
+                       man-db man-pages man-pages-de \
+                       xorg-server xorg-xinit xorg-xrandr xorg-xfontsel \
+                       xorg-xlsfonts xorg-xkill xorg-xinput \
+                       xorg-xwininfo xorg-xsetroot xorg-xbacklight xorg-xprop xclip \
+                       xf86-input-synaptics xf86-input-libinput xf86-input-evdev \
+                       xf86-video-amdgpu xf86-video-intel xf86-video-vmware \
+                       noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-jetbrains-mono \
+                       ttf-joypixels ttf-font-awesome \
+                       brightnessctl sxiv mpv zathura zathura-pdf-mupdf ffmpeg \
+                       imagemagick libnotify pamixer unclutter firefox-i18n-de python-pywal \
+                       xcompmgr youtube-dl rsync dunst \
+                       mesa vulkan-icd-loader \
+                       networkmanager \
+                       p7zip unrar unarchiver unzip unace xz rsync \
+                       nfs-utils cifs-utils ntfs-3g exfat-utils \
+                       alsa-utils pulseaudio-alsa pulseaudio-equalizer \
+                       dash zsh zsh-completions zsh-syntax-highlighting
 
 
 if [[ $wifianswer = y ]] ; then
@@ -221,6 +220,8 @@ ln -s ~/.config/shell/profile .zprofile
 rm ~/.zshrc ~/.zsh_history
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 dots config --local status.showUntrackedFiles no
+
+wal -i ~/.local/share/wallpaper/bg.img
 
 printf '\033c'
 echo "Finished!"

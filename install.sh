@@ -206,7 +206,7 @@ exit
 printf '\033c'
 cd "$HOME" || exit
 
-wal -i ~/.local/share/wallpaper/bg.img
+wal -n -q -e -t -s -i ~/.local/share/wallpaper/bg.img
 
 git clone --separate-git-dir="$HOME"/.dotfiles https://github.com/yungsnowx/dotfiles.git tmpdotfiles
 rsync --recursive --verbose --exclude '.git' tmpdotfiles/ "$HOME"/

@@ -171,7 +171,7 @@ pacman -Sq --noconfirm linux-headers vim git jshon expac git wget acpid avahi ne
                        ttf-joypixels ttf-font-awesome \
                        brightnessctl sxiv mpv zathura zathura-pdf-mupdf ffmpeg \
                        imagemagick libnotify pamixer unclutter firefox-i18n-de \
-                       xcompmgr youtube-dl rsync dunst arandr nitrogen \
+                       xcompmgr youtube-dl rsync dunst arandr nitrogen xwallpaper \
                        mesa vulkan-icd-loader \
                        networkmanager \
                        p7zip unrar unarchiver unzip unace xz rsync \
